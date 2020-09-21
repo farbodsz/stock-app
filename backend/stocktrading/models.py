@@ -20,7 +20,7 @@ class Balance(models.Model):
     balance = models.BigIntegerField()
 
     def __str__(self):
-        return f"{self.user_id}: {self.balance}"
+        return f"{self.user.username}: {self.balance}"
 
 
 class Stock(models.Model):
@@ -31,4 +31,4 @@ class Stock(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return f"{user}, {stock_id}, {amount}"
+        return f"{self.user.username}, {self.stock_id}, {self.amount}"
