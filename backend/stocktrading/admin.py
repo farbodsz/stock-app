@@ -4,7 +4,7 @@ from .models import Balance, Stock, User
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("user_id", "username")
+    list_display = ("username",)
 
 
 class BalanceAdmin(admin.ModelAdmin):
