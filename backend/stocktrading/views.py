@@ -1,3 +1,21 @@
 from django.shortcuts import render
 
-# Create your views here.
+from rest_framework import viewsets
+
+from .models import Balance, Stock, User
+from .serializers import BalanceSerializer, StockSerializer, UserSerializer
+
+
+class UserView(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+
+class BalanceView(viewsets.ModelViewSet):
+    serializer_class = BalanceSerializer
+    queryset = Balance.objects.all()
+
+
+class StockView(viewsets.ModelViewSet):
+    serializer_class = StockSerializer
+    queryset = Stock.objects.all()
