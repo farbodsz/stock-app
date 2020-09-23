@@ -7,6 +7,21 @@
 }
 
 .title {
-  color: white;
+  color: $color-text-light;
   font-size: $font-size-banner;
+  display: inline;
+  vertical-align: middle;
+}
+
+.button {
+  float: right;
+  margin: 0 20px;
+  font-weight: 700;
+  color: $color-text-light;
+  vertical-align: middle;
+}
+
+.button:hover {
+  text-decoration: none;
+  color: $color-accent-light;
 }
