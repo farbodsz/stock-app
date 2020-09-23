@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import LandingSection from "./LandingSection";
+import Footer from "./Footer";
 
 export default function LandingPage() {
   return (
@@ -13,6 +14,7 @@ export default function LandingPage() {
         body="Lorem ipsum ..."
         alt={false}
       />
+      <Footer />
     </div>
   );
 }
