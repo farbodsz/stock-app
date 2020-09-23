@@ -1,0 +1,12 @@
+@import "../colors";
+@import "../fonts";
+
+.header {
+  padding: 24px;
+  background-color: $color-primary-dark;
+}
+
+.title {
+  color: white;
+  font-size: $font-size-banner;
+}
