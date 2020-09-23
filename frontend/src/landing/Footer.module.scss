@@ -1,0 +1,21 @@
+@import "../colors";
+@import "../fonts";
+
+.footer {
+  padding: 60px;
+  background-color: $color-background-dark;
+  text-align: center;
+}
+
+.text {
+  color: $color-text-light;
+  font-family: $font-stack-code;
+  font-size: $font-size-footer;
+  padding: 15px 0;
+}
+
+.person {
+  @extend .text;
+  color: $color-primary-light;
+  font-weight: 700;
+}
