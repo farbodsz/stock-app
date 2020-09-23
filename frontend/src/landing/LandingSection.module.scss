@@ -1,0 +1,21 @@
+@import "../colors";
+@import "../fonts";
+
+.container-base {
+  padding: 70px 40px;
+  text-align: center;
+}
+
+.container {
+  @extend .container-base;
+  background-color: $color-background;
+}
+
+.containerAlt {
+  @extend .container-base;
+  background-color: $color-background-light;
+}
+
+.title {
+  padding-bottom: 50px;
+}
