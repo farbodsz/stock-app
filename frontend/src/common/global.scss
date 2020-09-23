@@ -1,0 +1,21 @@
+@import "colors";
+@import "fonts";
+
+* {
+  font-family: $font-stack;
+  font-size: $font-size-body;
+
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-size: $font-size-heading;
+  font-weight: $font-weight-heading;
+}
+
+a {
+  text-decoration: none;
+}
