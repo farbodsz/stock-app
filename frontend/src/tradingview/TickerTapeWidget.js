@@ -62,7 +62,10 @@ export default class TickerTapeWidget extends React.Component {
 
   render() {
     return (
-      <div id={this.WIDGET_CONTAINER_ID} class="tradingview-widget-container" />
+      <div
+        id={this.WIDGET_CONTAINER_ID}
+        className="tradingview-widget-container"
+      />
     );
   }
 }
