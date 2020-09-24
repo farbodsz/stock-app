@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "stocktrading",
     "corsheaders",
     "rest_framework",
+    "knox",
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
+# Rest framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

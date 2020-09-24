@@ -1,11 +1,5 @@
 from django.db import models
-
-
-class User(models.Model):
-    username = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.username
+from django.contrib.auth.models import User
 
 
 class Balance(models.Model):
@@ -13,21 +7,21 @@ class Balance(models.Model):
     not the value of their stocks.
     """
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name="balance", on_delete=models.CASCADE, null=True)
 
     # Balance stored in cents not dollars
     balance = models.BigIntegerField()
 
     def __str__(self):
-        return f"{self.user.username}: {self.balance}"
+        return str(self.balance)
 
 
 class Stock(models.Model):
     """One of the user's currently owned stocks."""
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name="stock", on_delete=models.CASCADE, null=True)
     stock_id = models.CharField(max_length=5)
     amount = models.IntegerField()
 
     def __str__(self):
-        return f"{self.user.username}, {self.stock_id}, {self.amount}"
+        return self.stock_id

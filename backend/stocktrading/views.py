@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from rest_framework import viewsets
+from rest_framework import viewsets , permissions
 
 from .models import Balance, Stock, User
 from .serializers import BalanceSerializer, StockSerializer, UserSerializer
@@ -13,9 +13,22 @@ class UserView(viewsets.ModelViewSet):
 
 class BalanceView(viewsets.ModelViewSet):
     serializer_class = BalanceSerializer
-    queryset = Balance.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):  # added
+        return self.request.user.balance.all()
+
+    def perform_create(self, serializer):  # added
+        serializer.save(owner=self.request.user)
 
 
 class StockView(viewsets.ModelViewSet):
     serializer_class = StockSerializer
-    queryset = Stock.objects.all()
+    
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):  # added
+        return self.request.user.stock.all()
+
+    def perform_create(self, serializer):  # added
+        serializer.save(owner=self.request.user)
