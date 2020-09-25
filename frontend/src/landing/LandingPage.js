@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
+import Header from "../common/Header";
 import LandingSection from "./LandingSection";
-import Footer from "./Footer";
+import Footer from "../common/Footer";
 
 export default function LandingPage() {
   return (

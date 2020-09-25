@@ -13,7 +13,7 @@ import styles from "./LandingSection.module.scss";
 export default function LandingSection(props) {
   return (
     <div className={props.alt ? styles.containerAlt : styles.container}>
-      <h1 className={styles.title}>{props.title}</h1>
+      <h1>{props.title}</h1>
       <p>{props.body}</p>
     </div>
   );
