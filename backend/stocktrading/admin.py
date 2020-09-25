@@ -1,6 +1,6 @@
 from django.contrib import admin
-
-from .models import Balance, Stock, User
+from django.contrib.auth.models import User
+from .models import Balance, Stock
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -8,13 +8,12 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class BalanceAdmin(admin.ModelAdmin):
-    list_display = ("user", "balance")
+    list_display = ("owner", "balance")
 
 
 class StockAdmin(admin.ModelAdmin):
-    list_display = ("user", "stock_id", "amount")
+    list_display = ("owner", "stock_id", "amount")
 
 
-admin.site.register(User, UserAdmin)
 admin.site.register(Balance, BalanceAdmin)
 admin.site.register(Stock, StockAdmin)
