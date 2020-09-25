@@ -10,6 +10,6 @@ import TradingViewWidget from "react-tradingview-widget";
  *
  * See: https://uk.tradingview.com/widget/advanced-chart/
  */
-export default function AdvancedTradingViewChartWidget(props) {
+export default function AdvancedRealTimeChartWidget(props) {
   return <TradingViewWidget symbol={props.symbol} />;
 }
