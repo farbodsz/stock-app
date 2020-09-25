@@ -15,10 +15,10 @@ class BalanceView(viewsets.ModelViewSet):
     serializer_class = BalanceSerializer
     permission_classes = [permissions.IsAuthenticated]
     
-    def get_queryset(self):  # added
+    def get_queryset(self): 
         return self.request.user.balance.all()
 
-    def perform_create(self, serializer):  # added
+    def perform_create(self, serializer): 
         serializer.save(owner=self.request.user)
 
 
@@ -27,8 +27,8 @@ class StockView(viewsets.ModelViewSet):
     
     permission_classes = [permissions.IsAuthenticated]
     
-    def get_queryset(self):  # added
+    def get_queryset(self): 
         return self.request.user.stock.all()
 
-    def perform_create(self, serializer):  # added
+    def perform_create(self, serializer): 
         serializer.save(owner=self.request.user)
