@@ -1,0 +1,13 @@
+.containerParent {
+  display: flex;
+  height: 100vh;
+}
+
+.containerNav {
+  flex: 25%;
+  max-width: 300px;
+}
+
+.containerMain {
+  flex: 75%;
+}

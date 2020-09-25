@@ -1,0 +1,15 @@
+@import "../colors";
+
+.item {
+  font-size: 22px;
+  color: $color-text-light;
+  margin-bottom: 25px;
+}
+
+.item:hover {
+  color: $color-accent;
+}
+
+.active {
+  font-weight: 700;
+}
