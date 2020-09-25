@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Login.module.scss";
 import Header from "../common/Header";
-import { TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 export default function RegisterPage() {
   return (
@@ -12,7 +12,8 @@ export default function RegisterPage() {
         <form noValidate autoComplete="off">
           <TextField id="username" label="Username" />
           <TextField id="password" label="Password" />
-          <TextField id="password" label="Confirm Password" />
+          <TextField id="password-confirm" label="Confirm Password" />
+          <Button id="submit">Register</Button>
         </form>
       </div>
     </div>
