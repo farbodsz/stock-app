@@ -9,5 +9,4 @@ verify_ssl = true
 django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
-
-
+django-rest-knox = "*"
