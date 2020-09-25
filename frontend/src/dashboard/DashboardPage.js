@@ -2,13 +2,9 @@ import React from "react";
 import styles from "./DashboardPage.module.scss";
 import NavigationPane from "./NavigationPane";
 import TickerTapeWidget from "../tradingview/TickerTapeWidget";
+import HomePane from "./HomePane";
 
 export default class DashboardPage extends React.Component {
-  getUsername() {
-    // TODO: Dummy
-    return "bingbong";
-  }
-
   getTickerTapeSymbols() {
     // TODO: Dummy
     return [
@@ -34,7 +30,9 @@ export default class DashboardPage extends React.Component {
           <NavigationPane className={styles.containerNav} />
         </div>
         <main className={styles.containerMain}>
-          <h1>Welcome, {this.getUsername()}!</h1>
+          <div className={styles.containerPane}>
+            <HomePane />
+          </div>
           <TickerTapeWidget symbols={this.getTickerTapeSymbols()} />
         </main>
       </div>
