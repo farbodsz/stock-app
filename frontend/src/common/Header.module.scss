@@ -6,11 +6,20 @@
   background-color: $color-primary-dark;
 }
 
+.text-hover {
+  text-decoration: none;
+  color: $color-accent-light;
+}
+
 .title {
   color: $color-text-light;
   font-size: $font-size-banner;
   display: inline;
   vertical-align: middle;
+}
+
+.title:hover {
+  @extend .text-hover;
 }
 
 .button {
@@ -22,6 +31,5 @@
 }
 
 .button:hover {
-  text-decoration: none;
-  color: $color-accent-light;
+  @extend .text-hover;
 }
