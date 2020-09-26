@@ -7,11 +7,11 @@ import Card from "../common/Card";
 import FormLayout from "./FormLayout";
 import axios from "../api/axios";
 
-const headers = {
+const HEADERS = {
   "content-type": "application/json"
 };
 
-const headers2 = {
+const HEADERS_AUTH = {
   authorization: "",
   "content-type": "application/json"
 };
@@ -26,27 +26,28 @@ export default class LoginPage extends React.Component {
       token: ""
     };
 
-    // TODO: Temporary bindings
+    // TODO: Temporary bindings ------------------------------------------------
     this.testAction = this.testAction.bind(this);
     this.onSubmit2 = this.onSubmit2.bind(this);
+    // -------------------------------------------------------------------------
   }
 
+  // TODO These functions are temporarily used for debugging purposes: ---------
   testAction = e => {
     console.log("hello");
     this.postLogin();
     e.preventDefault();
   };
-
   testAction2 = e => {
     console.log("hello");
     this.getBalance();
     e.preventDefault();
   };
-
   onSubmit2() {
     console.log("Submit 2 clicked");
     // TODO
   }
+  // ---------------------------------------------------------------------------
 
   getStocks() {
     axios
@@ -62,9 +63,10 @@ export default class LoginPage extends React.Component {
 
   getBalance() {
     console.log("hello im here");
-    headers2.authorization = this.state.token;
+    HEADERS_AUTH.authorization = this.state.token;
+
     axios
-      .get(`/balance`, {}, { headers: headers2 })
+      .get(`/balance`, {}, { headers: HEADERS_AUTH })
       .then(res => {
         const data = res.data;
         console.log(data);
@@ -81,7 +83,7 @@ export default class LoginPage extends React.Component {
       .post(
         `/auth/login/`,
         { username: this.state.username, password: this.state.password },
-        { headers: headers }
+        { headers: HEADERS }
       )
       .then(res => {
         const data = res.data;
