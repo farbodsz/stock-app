@@ -2,15 +2,26 @@ import React from "react";
 import styles from "./NavigationPane.module.scss";
 import NavItem from "./NavItem";
 
+/**
+ * Navigation pane component.
+ *
+ * Takes the following props:
+ *  - `items`: a list of string names for each navigation item
+ *  - `activeIndex`: 0-indexed integer determining which navigation item to mark
+ *                   as "active".
+ *  - `onSelect`: a function taking the new active index which changes the
+ *                selected item and pane.
+ */
 export default class NavigationPane extends React.Component {
   render() {
-    return (
-      <nav className={styles.container}>
-        <NavItem text="Dashboard" active={true} />
-        <NavItem text="Buy a stock" />
-        <NavItem text="View stock info" />
-        <NavItem text="Log out" />
-      </nav>
-    );
+    const navItems = this.props.items.map((item, idx) => (
+      <NavItem
+        key={idx}
+        text={item}
+        active={idx === this.props.activeIndex}
+        onClick={() => this.props.onSelect(idx)}
+      />
+    ));
+    return <nav className={styles.container}>{navItems}</nav>;
   }
 }
