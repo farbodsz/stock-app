@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./Login.module.scss";
 import Header from "../common/Header";
 import Button from "../common/Button";
-import { Container, Grid, Link, TextField } from "@material-ui/core";
+import TextField from "../common/TextField";
+import { Container, Grid, Link } from "@material-ui/core";
 
 export default class RegisterPage extends React.Component {
   render() {
@@ -11,26 +12,17 @@ export default class RegisterPage extends React.Component {
         <Header />
         <Container component="main" maxWidth="xs">
           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Username"
+            className={styles.formElement}
             name="username"
-            autoFocus
+            label="Username"
           />
           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
+            className={styles.formElement}
             name="password"
             label="Password"
             type="password"
-            id="password"
           />
-          <Button className={styles.buttonSubmit}>Sign In</Button>
+          <Button className={styles.button}>Sign In</Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

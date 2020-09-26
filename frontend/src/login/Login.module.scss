@@ -8,7 +8,11 @@
   background-color: $color-background;
 }
 
-.buttonSubmit {
-  color: blue;
+.formElement {
   width: 100%;
+}
+
+.button {
+  @extend .formElement;
+  margin-top: 8px;
 }
