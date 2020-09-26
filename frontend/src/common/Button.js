@@ -9,5 +9,9 @@ import styles from "./Button.module.scss";
  */
 export default function Button(props) {
   const allStyles = `${styles.button} ${props.className}`;
-  return <button className={allStyles}>{props.children}</button>;
+  return (
+    <button className={allStyles} onClick={props.onClick} type={props.type}>
+      {props.children}
+    </button>
+  );
 }
