@@ -5,7 +5,21 @@ import TickerTapeWidget from "../tradingview/TickerTapeWidget";
 import HomePane from "./HomePane";
 import PaneLayout from "./PaneLayout";
 
+/**
+ * Page that displays the dashboard. This includes the navigation pane and the
+ * main content pane. The main pane can be changed depending on which navigation
+ * item is selected.
+ *
+ * This component stores `paneIndex` in its state. This is a 0-indexed number
+ * indicating which nav item to highlight and which pane to display.
+ */
 export default class DashboardPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { activeIndex: 0 };
+  }
+
   getTickerTapeSymbols() {
     // TODO: Dummy
     return [
@@ -25,10 +39,12 @@ export default class DashboardPage extends React.Component {
   }
 
   render() {
+    const navItems = ["Dashboard", "Buy a stock", "View stock info", "Logout"];
+
     return (
       <div className={styles.containerParent}>
         <div className={styles.containerNav}>
-          <NavigationPane className={styles.containerNav} />
+          <NavigationPane items={navItems} className={styles.containerNav} />
         </div>
         <main className={styles.containerMain}>
           <TickerTapeWidget symbols={this.getTickerTapeSymbols()} />

@@ -7,26 +7,19 @@ import styles from "./NavItem.module.scss";
  * It takes the following as props:
  *  - `text`: string, the title of the navigation item.
  *  - `active`: boolean. True if the navigation item is selected.
- *
- * It stores the following as state:
- *  - `active`: boolean. True if the navigation item is selected.
  */
 export default class NavItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { active: this.props.active };
-  }
-
   render() {
     var itemStyle = styles.item;
-    if (this.state.active) {
+    if (this.props.active) {
       itemStyle += " " + styles.active;
     }
 
     return (
       <div>
-        <p className={itemStyle}>{this.props.text}</p>
+        <p className={itemStyle} onClick={this.props.onClick}>
+          {this.props.text}
+        </p>
       </div>
     );
   }
