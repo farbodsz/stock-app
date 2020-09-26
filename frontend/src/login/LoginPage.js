@@ -13,6 +13,12 @@ const headers2 = {
 };
 
 export default class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onSubmit2 = this.onSubmit2.bind(this);
+  }
+
   state = {
     username: "",
     password: "",
@@ -30,6 +36,11 @@ export default class LoginPage extends React.Component {
     this.getBalance();
     e.preventDefault();
   };
+
+  onSubmit2() {
+    console.log("Submit 2 clicked");
+    // TODO
+  }
 
   getStocks() {
     axios
@@ -97,6 +108,9 @@ export default class LoginPage extends React.Component {
               Submit
             </Button>
           </form>
+          <Button id="submit2" onClick={this.onSubmit2}>
+            Test Submit
+          </Button>
         </div>
       </div>
     );
