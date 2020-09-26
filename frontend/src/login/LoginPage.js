@@ -16,14 +16,14 @@ export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      username: "",
+      password: "",
+      token: ""
+    };
+
     this.onSubmit2 = this.onSubmit2.bind(this);
   }
-
-  state = {
-    username: "",
-    password: "",
-    token: ""
-  };
 
   testAction = e => {
     console.log("hello");
