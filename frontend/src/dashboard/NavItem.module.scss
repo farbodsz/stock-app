@@ -1,0 +1,17 @@
+@import "../colors";
+
+.item {
+  font-size: 22px;
+  color: $color-text-light;
+  margin-bottom: 25px;
+  transition: color 100ms ease-in-out;
+}
+
+.item:hover {
+  color: $color-accent;
+  transition: color 100ms ease-in-out;
+}
+
+.active {
+  font-weight: 700;
+}
