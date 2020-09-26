@@ -13,10 +13,6 @@ import NavItem from "./NavItem";
  *                selected item and pane.
  */
 export default class NavigationPane extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const navItems = this.props.items.map((item, idx) => (
       <NavItem
