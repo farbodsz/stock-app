@@ -1,18 +1,17 @@
-import React , {Component}from "react";
-import styles from "./Login.module.scss";
+import React, { Component } from "react";
 import Header from "../common/Header";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 
-export default class RegisterPage extends Component{
-  render(){
-    return(
+export default class RegisterPage extends Component {
+  render() {
+    return (
       <div>
         <Header />
-      <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs">
           <TextField
             variant="outlined"
             margin="normal"
@@ -38,7 +37,7 @@ export default class RegisterPage extends Component{
             fullWidth
             variant="contained"
             color="primary"
-            size = "large"
+            size="large"
           >
             Sign In
           </Button>
@@ -54,8 +53,8 @@ export default class RegisterPage extends Component{
               </Link>
             </Grid>
           </Grid>
-    </Container>
-    </div>
+        </Container>
+      </div>
     );
   }
 }
