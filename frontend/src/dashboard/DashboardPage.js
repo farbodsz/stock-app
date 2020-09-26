@@ -30,10 +30,10 @@ export default class DashboardPage extends React.Component {
           <NavigationPane className={styles.containerNav} />
         </div>
         <main className={styles.containerMain}>
+          <TickerTapeWidget symbols={this.getTickerTapeSymbols()} />
           <div className={styles.containerPane}>
             <HomePane />
           </div>
-          <TickerTapeWidget symbols={this.getTickerTapeSymbols()} />
         </main>
       </div>
     );
