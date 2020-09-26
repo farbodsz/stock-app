@@ -8,14 +8,15 @@ import FormLayout from "./FormLayout";
 import axios from "../api/axios";
 
 const headers = {
-  "content-type": "application/json",
+  "content-type": "application/json"
 };
+
 const config = {
   headers: {
     "content-type": "application/json",
-    authorization: "",
+    authorization: ""
   },
-  responseType: "json",
+  responseType: "json"
 };
 
 export default class LoginPage extends React.Component {
@@ -25,7 +26,7 @@ export default class LoginPage extends React.Component {
     this.state = {
       username: "",
       password: "",
-      token: "",
+      token: ""
     };
 
     // TODO: Temporary bindings ------------------------------------------------
@@ -35,12 +36,12 @@ export default class LoginPage extends React.Component {
   }
 
   // TODO These functions are temporarily used for debugging purposes: ---------
-  testAction = (e) => {
+  testAction = e => {
     console.log("hello");
     this.postLogin();
     e.preventDefault();
   };
-  testAction2 = (e) => {
+  testAction2 = e => {
     console.log("hello");
     this.getBalance();
     e.preventDefault();
@@ -57,11 +58,11 @@ export default class LoginPage extends React.Component {
     let url = "/balances/" + userId;
     axios
       .get(url, {})
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -70,11 +71,11 @@ export default class LoginPage extends React.Component {
     config.headers.authorization = "Token " + this.state.token;
     axios
       .get("/stocks/", config)
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -86,14 +87,14 @@ export default class LoginPage extends React.Component {
       .post(
         `/auth/login/`,
         { username: this.state.username, password: this.state.password },
-        { headers: HEADERS }
+        { headers: headers }
       )
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         this.setState({ token: data.token });
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -109,14 +110,14 @@ export default class LoginPage extends React.Component {
                 id="username"
                 className={styles.formElement}
                 label="Username"
-                onChange={(e) => this.setState({ username: e.target.value })}
+                onChange={e => this.setState({ username: e.target.value })}
               />
               <TextField
                 id="password"
                 className={styles.formElement}
                 label="Password"
                 type="password"
-                onChange={(e) => this.setState({ password: e.target.value })}
+                onChange={e => this.setState({ password: e.target.value })}
               />
               <Button
                 id="submit"
