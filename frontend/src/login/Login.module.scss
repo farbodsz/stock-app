@@ -1,14 +1,10 @@
 @import "../colors";
 
-.container {
-  padding: 70px 40px;
-  text-align: center;
-  // TODO: Fix height so it adapts to height dynamically
-  height: 720px;
-  background-color: $color-background;
+.formElement {
+  width: 100%;
 }
 
-.buttonSubmit {
-  color: blue;
-  width: 100%;
+.button {
+  @extend .formElement;
+  margin-top: 8px;
 }
