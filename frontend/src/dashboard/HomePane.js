@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HomePane.module.scss";
-import Card from "./Card";
+import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 
 export default class HomePane extends React.Component {
