@@ -5,6 +5,7 @@ import TickerTapeWidget from "../tradingview/TickerTapeWidget";
 import HomePane from "./HomePane";
 import PaneLayout from "./PaneLayout";
 import BuyStockPane from "./BuyStockPane";
+import ViewStockPane from "./ViewStockPane";
 import LogoutPane from "./LogoutPane";
 
 /**
@@ -56,7 +57,7 @@ export default class DashboardPage extends React.Component {
     const panes = [
       <HomePane />,
       <BuyStockPane />,
-      <BuyStockPane />,
+      <ViewStockPane />,
       <LogoutPane />
     ];
 
