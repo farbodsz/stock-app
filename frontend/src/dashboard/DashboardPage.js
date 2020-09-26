@@ -5,6 +5,7 @@ import TickerTapeWidget from "../tradingview/TickerTapeWidget";
 import HomePane from "./HomePane";
 import PaneLayout from "./PaneLayout";
 import BuyStockPane from "./BuyStockPane";
+import LogoutPane from "./LogoutPane";
 
 /**
  * Page that displays the dashboard. This includes the navigation pane and the
@@ -56,7 +57,7 @@ export default class DashboardPage extends React.Component {
       <HomePane />,
       <BuyStockPane />,
       <BuyStockPane />,
-      <BuyStockPane />
+      <LogoutPane />
     ];
 
     return (
