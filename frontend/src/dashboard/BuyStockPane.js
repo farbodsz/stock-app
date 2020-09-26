@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./BuyStockPane.module.scss";
-import Card from "./Card";
+import Card from "../common/Card";
 import { TextField } from "@material-ui/core";
 
 export default class BuyStockPane extends React.Component {
