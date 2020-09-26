@@ -1,9 +1,27 @@
 @import "../fonts";
 
+.cardContainer {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.inputCard {
+  min-width: 400px;
+}
+
 .tickerInputCard {
-  max-width: 600px;
+  @extend .inputCard;
+  margin-right: 20px;
 }
 
 .tickerInputField {
   width: 8em;
+}
+
+.amountInputCard {
+  @extend .inputCard;
+}
+
+.amountInputField {
+  width: 4em;
 }
