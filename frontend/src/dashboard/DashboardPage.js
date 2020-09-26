@@ -4,6 +4,7 @@ import NavigationPane from "./NavigationPane";
 import TickerTapeWidget from "../tradingview/TickerTapeWidget";
 import HomePane from "./HomePane";
 import PaneLayout from "./PaneLayout";
+import BuyStockPane from "./BuyStockPane";
 
 /**
  * Page that displays the dashboard. This includes the navigation pane and the
@@ -18,6 +19,7 @@ export default class DashboardPage extends React.Component {
     super(props);
 
     this.state = { activeIndex: 0 };
+    this.onSelect = this.onSelect.bind(this);
   }
 
   getTickerTapeSymbols() {
@@ -38,20 +40,39 @@ export default class DashboardPage extends React.Component {
     ];
   }
 
+  /**
+   * Changes which navigation item is active.
+   *
+   * @param {integer} i the index of the navigation item to select,
+   *                    corresponding to the pane to display.
+   */
+  onSelect(i) {
+    this.setState({ activeIndex: i });
+  }
+
   render() {
     const navItems = ["Dashboard", "Buy a stock", "View stock info", "Logout"];
+    const panes = [
+      <HomePane />,
+      <BuyStockPane />,
+      <BuyStockPane />,
+      <BuyStockPane />
+    ];
 
     return (
       <div className={styles.containerParent}>
         <div className={styles.containerNav}>
-          <NavigationPane items={navItems} className={styles.containerNav} />
+          <NavigationPane
+            items={navItems}
+            activeIndex={this.state.activeIndex}
+            className={styles.containerNav}
+            onSelect={this.onSelect}
+          />
         </div>
         <main className={styles.containerMain}>
           <TickerTapeWidget symbols={this.getTickerTapeSymbols()} />
           <div className={styles.containerPanes}>
-            <PaneLayout>
-              <HomePane />
-            </PaneLayout>
+            <PaneLayout>{panes[this.state.activeIndex]}</PaneLayout>
           </div>
         </main>
       </div>

@@ -5,23 +5,16 @@ import NavItem from "./NavItem";
 /**
  * Navigation pane component.
  *
- * Takes `items` as props: a list of strings for each navigation item to show.
- *
- * Stores `activeIndex` as state: 0-indexed integer determining which navigation
- * item to mark as "active".
+ * Takes the following props:
+ *  - `items`: a list of string names for each navigation item
+ *  - `activeIndex`: 0-indexed integer determining which navigation item to mark
+ *                   as "active".
+ *  - `onSelect`: a function taking the new active index which changes the
+ *                selected item and pane.
  */
 export default class NavigationPane extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { activeIndex: 0 };
-  }
-
-  /**
-   * Changes which navigation item is active.
-   */
-  select(i) {
-    this.setState({ activeIndex: i });
   }
 
   render() {
@@ -29,8 +22,8 @@ export default class NavigationPane extends React.Component {
       <NavItem
         key={idx}
         text={item}
-        active={idx === this.state.activeIndex}
-        onClick={() => this.select(idx)}
+        active={idx === this.props.activeIndex}
+        onClick={() => this.props.onSelect(idx)}
       />
     ));
     return <nav className={styles.container}>{navItems}</nav>;
