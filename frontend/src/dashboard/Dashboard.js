@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./DashboardPage.module.scss";
+import styles from "./Dashboard.module.scss";
 import NavigationPane from "./NavigationPane";
 import TickerTapeWidget from "../tradingview/TickerTapeWidget";
 import HomePane from "./HomePane";
@@ -16,7 +16,7 @@ import LogoutPane from "./LogoutPane";
  * This component stores `paneIndex` in its state. This is a 0-indexed number
  * indicating which nav item to highlight and which pane to display.
  */
-export default class DashboardPage extends React.Component {
+export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
