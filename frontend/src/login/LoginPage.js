@@ -6,6 +6,7 @@ import TextField from "../common/TextField";
 import Card from "../common/Card";
 import FormLayout from "./FormLayout";
 import axios from "../api/axios";
+import Cookies from "js-cookie";
 
 const headers = {
   "content-type": "application/json"
@@ -103,12 +104,20 @@ export default class LoginPage extends React.Component {
       )
       .then(res => {
         const data = res.data;
-        this.setState({ token: data.token });
+        this.onTokenChange(data.token);
         console.log(data);
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  /**
+   * Callback function invoked when the login token has changed.
+   */
+  onTokenChange(newToken) {
+    this.setState({ token: newToken });
+    Cookies.set("token", newToken);
   }
 
   render() {
