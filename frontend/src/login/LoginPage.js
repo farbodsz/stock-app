@@ -19,6 +19,9 @@ const config = {
   responseType: "json"
 };
 
+/**
+ * Page where the user can log in.
+ */
 export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,18 +32,13 @@ export default class LoginPage extends React.Component {
       token: ""
     };
 
-    // TODO: Temporary bindings ------------------------------------------------
-    this.testAction = this.testAction.bind(this);
+    // TODO: Temporary bindings:
     this.onSubmit2 = this.onSubmit2.bind(this);
-    // -------------------------------------------------------------------------
+
+    this.onLogin = this.onLogin.bind(this);
   }
 
   // TODO These functions are temporarily used for debugging purposes: ---------
-  testAction = e => {
-    console.log("hello");
-    this.postLogin();
-    e.preventDefault();
-  };
   testAction2 = e => {
     console.log("hello");
     this.getBalance();
@@ -51,8 +49,6 @@ export default class LoginPage extends React.Component {
     this.getStocks();
     // TODO
   }
-  // ---------------------------------------------------------------------------
-
   getBalance() {
     let userId = 2;
     let url = "/balances/" + userId;
@@ -66,7 +62,6 @@ export default class LoginPage extends React.Component {
         console.log(error);
       });
   }
-
   getStocks() {
     config.headers.authorization = "Token " + this.state.token;
     axios
@@ -79,7 +74,24 @@ export default class LoginPage extends React.Component {
         console.log(error);
       });
   }
+  // ---------------------------------------------------------------------------
 
+  /**
+   * Logs in the user, using the username and password in the text fields.
+   * @param {Event} e
+   */
+  onLogin(e) {
+    console.log("Logging in...");
+    this.postLogin();
+    e.preventDefault();
+  }
+
+  /**
+   * Posts the user's details to the server.
+   *
+   * If the user was able to log in correctly, this component's `token` state
+   * will be updated.
+   */
   postLogin() {
     console.log(this.state.username);
     console.log(this.state.password);
@@ -122,7 +134,7 @@ export default class LoginPage extends React.Component {
               <Button
                 id="submit"
                 className={styles.button}
-                onClick={this.testAction}
+                onClick={this.onLogin}
               >
                 Submit
               </Button>
