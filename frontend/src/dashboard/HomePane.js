@@ -2,21 +2,73 @@ import React from "react";
 import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
-
+import axios from "../api/axios";
 /**
  * The overview pane of the dashboard.
  *
  * Takes `token` as props.
  */
+const config = {
+  headers: {
+    "content-type": "application/json",
+    authorization: "",
+  },
+  responseType: "json",
+};
+
 export default class HomePane extends React.Component {
+  state = {
+    username: "",
+    balance: "",
+    stocks: {},
+  };
+
   getUsername() {
-    // TODO: Dummy
-    return "bingbong";
+    config.headers.authorization = "Token " + this.props.token;
+    axios
+      .get("/auth/user", config)
+      .then((res) => {
+        const data = res.data;
+        this.setState({ username: data.username });
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  getStocks() {
+    config.headers.authorization = "Token " + this.props.token;
+    axios
+      .get("/stocks/", config)
+      .then((res) => {
+        const data = res.data;
+        this.setState({ stocks: data });
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   getBalance() {
-    // TODO: Dummy
-    return "$1 000 000";
+    config.headers.authorization = "Token " + this.props.token;
+    axios
+      .get("/balances/", config)
+      .then((res) => {
+        const data = res.data;
+        this.setState({ balance: data[0].balance });
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  componentDidMount() {
+    this.getBalance();
+    this.getUsername();
+    this.getStocks();
   }
 
   render() {
@@ -24,10 +76,10 @@ export default class HomePane extends React.Component {
     // instead?
     return (
       <div>
-        <h1>Welcome, {this.getUsername()}!</h1>
+        <h1>Welcome, {this.state.username}!</h1>
         <div className={styles.balanceContainer}>
           <Card title="Balance">
-            <p className={styles.balanceText}>{this.getBalance()}</p>
+            <p className={styles.balanceText}>{this.state.balance}</p>
           </Card>
         </div>
         <div className={styles.chartContainer}>
