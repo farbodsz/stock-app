@@ -5,9 +5,42 @@ import Button from "../common/Button";
 import TextField from "../common/TextField";
 import FormLayout from "./FormLayout";
 import Card from "../common/Card";
-import { Grid, Link } from "@material-ui/core";
+import axios from "../api/axios";
+
+const headers = {
+  "content-type": "application/json",
+};
 
 export default class RegisterPage extends React.Component {
+  state = {
+    username: "",
+    password: "",
+  };
+
+  testAction = (e) => {
+    console.log("hello");
+    this.postLogin();
+    e.preventDefault();
+  };
+
+  postLogin() {
+    console.log(this.state.username);
+    console.log(this.state.password);
+    axios
+      .post(
+        `/auth/register/`,
+        { username: this.state.username, password: this.state.password },
+        { headers: headers }
+      )
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div>
@@ -18,26 +51,22 @@ export default class RegisterPage extends React.Component {
               className={styles.formElement}
               name="username"
               label="Username"
+              onChange={(e) => this.setState({ username: e.target.value })}
             />
             <TextField
               className={styles.formElement}
               name="password"
               label="Password"
               type="password"
+              onChange={(e) => this.setState({ password: e.target.value })}
             />
-            <Button className={styles.button}>Sign In</Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            <Button
+              id="submit"
+              className={styles.button}
+              onClick={this.testAction}
+            >
+              Sign In
+            </Button>
           </Card>
         </FormLayout>
       </div>
