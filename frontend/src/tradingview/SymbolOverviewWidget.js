@@ -19,10 +19,8 @@ export default class SymbolOverviewWidget extends React.Component {
 
   render() {
     return (
-      <div
-        id="tradingview-widget-container"
-        className="tradingview-widget-container"
-      >
+      <div id="tradingview-widget-container">
+        <div id="tradingview_993c6"></div>
         <div id="tradingview-widget" className="tradingview-widget" />
       </div>
     );
