@@ -132,14 +132,14 @@ export default class BuyStockPane extends React.Component {
               </Button>
             </Card>
           </div>
-          <div>
-            <Card title={this.getStockChartTitle()}>
-              <AdvancedRealTimeChartWidget
-                symbol={this.getSelectedSymbol()}
-                width="100%"
-              />
-            </Card>
-          </div>
+        </div>
+        <div>
+          <Card title={this.getStockChartTitle()}>
+            <AdvancedRealTimeChartWidget
+              symbol={this.getSelectedSymbol()}
+              width="100%"
+            />
+          </Card>
         </div>
       </div>
     );
