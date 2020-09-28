@@ -10,8 +10,15 @@ import axios from "../api/axios";
 import { Redirect } from "react-router-dom";
 
 const headers = {
-  "content-type": "application/json"
+  "content-type": "application/json",
 };
+const config2 = {
+  headers: {
+    "content-type": "application/x-www-form-urlencoded",
+    authorization: "",
+  },
+};
+const qs = require("querystring");
 
 export default class RegisterPage extends React.Component {
   constructor(props) {
@@ -21,9 +28,7 @@ export default class RegisterPage extends React.Component {
       username: "",
       password: "",
       token: "",
-      isRegistered: false
     };
-
     this.onRegister = this.onRegister.bind(this);
   }
 
@@ -34,8 +39,6 @@ export default class RegisterPage extends React.Component {
   onRegister(e) {
     console.log("Registering user...");
     this.postRegister();
-
-    this.setState({isRegistered: true});
     e.preventDefault();
   }
 
@@ -54,16 +57,26 @@ export default class RegisterPage extends React.Component {
         { username: this.state.username, password: this.state.password },
         { headers: headers }
       )
-      .then(res => {
+      .then((res) => {
         const data = res.data;
+        config2.headers.authorization = "Token " + data.token;
+        let bal = { balance: 1000000 };
+        axios
+          .post(`/balances/`, qs.stringify(bal), config2)
+          .then((res) => {
+            const data = res.data;
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         this.onTokenChange(data.token);
         console.log(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
-
   /**
    * Callback function invoked when the login token has changed.
    */
@@ -73,7 +86,7 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
-    if (this.state.isRegistered) {
+    if (this.state.token) {
       return <Redirect to="/dashboard" />;
     }
 
@@ -86,14 +99,14 @@ export default class RegisterPage extends React.Component {
               className={styles.formElement}
               name="username"
               label="Username"
-              onChange={e => this.setState({ username: e.target.value })}
+              onChange={(e) => this.setState({ username: e.target.value })}
             />
             <TextField
               className={styles.formElement}
               name="password"
               label="Password"
               type="password"
-              onChange={e => this.setState({ password: e.target.value })}
+              onChange={(e) => this.setState({ password: e.target.value })}
             />
             <Button
               id="submit"
