@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./BuyStockPane.module.scss";
 import Button from "../common/Button";
 import Card from "../common/Card";
+import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 import { TextField } from "@material-ui/core";
 import axios from "../api/axios";
 import { formatBalance } from "./utils";
@@ -84,6 +85,21 @@ export default class BuyStockPane extends React.Component {
     return formatBalance(this.state.balance, false);
   }
 
+  /**
+   * Returns the symbol of the currently selected stock, which can be used with
+   * a TradingView chart.
+   */
+  getSelectedSymbol() {
+    return `NASDAQ:${this.state.ticker}`;
+  }
+
+  /**
+   * Returns the title of the stock chart.
+   */
+  getStockChartTitle() {
+    return this.state.ticker ? `${this.state.ticker}'s Performance` : "";
+  }
+
   render() {
     return (
       <div>
@@ -114,6 +130,14 @@ export default class BuyStockPane extends React.Component {
               <Button className={styles.buttonBuy} onClick={this.onBuy}>
                 Buy
               </Button>
+            </Card>
+          </div>
+          <div>
+            <Card title={this.getStockChartTitle()}>
+              <AdvancedRealTimeChartWidget
+                symbol={this.getSelectedSymbol()}
+                width="100%"
+              />
             </Card>
           </div>
         </div>
