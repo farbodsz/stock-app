@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./BuyStockPane.module.scss";
+import Button from "../common/Button";
 import Card from "../common/Card";
 import { TextField } from "@material-ui/core";
 
@@ -12,9 +13,14 @@ export default class BuyStockPane extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tickerInputField = React.createRef();
+    this.state = {
+      ticker: "",
+      amount: 0
+    };
+
     this.onTickerChange = this.onTickerChange.bind(this);
-    this.inputRef = React.createRef();
+    this.onAmountChange = this.onAmountChange.bind(this);
+    this.onBuy = this.onBuy.bind(this);
   }
 
   /**
@@ -24,6 +30,7 @@ export default class BuyStockPane extends React.Component {
    */
   onTickerChange(newTicker) {
     console.log("Ticker changed: " + newTicker);
+    this.setState({ ticker: newTicker });
   }
 
   /**
@@ -33,6 +40,17 @@ export default class BuyStockPane extends React.Component {
    */
   onAmountChange(newAmount) {
     console.log("Amount changed " + newAmount);
+    this.setState({ amount: newAmount });
+  }
+
+  onBuy() {
+    if (!this.state.ticker || !this.state.amount) {
+      alert("You must enter a ticker and a valid amount.");
+      return;
+    }
+
+    // TODO:
+    alert("Bought");
   }
 
   render() {
@@ -43,10 +61,6 @@ export default class BuyStockPane extends React.Component {
           <div className={styles.tickerInputCard}>
             <Card title="Enter ticker">
               <TextField
-                ref={this.tickerInputField}
-                inputRef={ref => {
-                  this.inputRef = ref;
-                }}
                 className={styles.tickerInputField}
                 InputProps={{ style: { fontSize: 40 } }}
                 inputProps={{ maxLength: 5 }}
@@ -58,15 +72,14 @@ export default class BuyStockPane extends React.Component {
           <div className={styles.amountInputCard}>
             <Card title="Buy stocks">
               <TextField
-                ref={this.tickerInputField}
-                inputRef={ref => {
-                  this.inputRef = ref;
-                }}
                 type="number"
                 placeholder="5"
                 onChange={event => this.onAmountChange(event.target.value)}
               />
               <p className={styles.amountLabel}>stocks</p>
+              <Button className={styles.buttonBuy} onClick={this.onBuy}>
+                Buy
+              </Button>
             </Card>
           </div>
         </div>
