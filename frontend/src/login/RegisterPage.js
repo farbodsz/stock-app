@@ -65,8 +65,8 @@ export default class RegisterPage extends React.Component {
    * Callback function invoked when the login token has changed.
    */
   onTokenChange(newToken) {
-    this.setState({ token: newToken });
     Cookies.set("token", newToken);
+    this.setState({ token: newToken });
   }
 
   render() {
