@@ -20,7 +20,8 @@ export default class RegisterPage extends React.Component {
     this.state = {
       username: "",
       password: "",
-      token: ""
+      token: "",
+      isRegistered: false
     };
 
     this.onRegister = this.onRegister.bind(this);
@@ -33,6 +34,8 @@ export default class RegisterPage extends React.Component {
   onRegister(e) {
     console.log("Registering user...");
     this.postRegister();
+
+    this.setState({isRegistered: true});
     e.preventDefault();
   }
 
@@ -70,7 +73,7 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
-    if (this.state.token) {
+    if (this.state.isRegistered) {
       return <Redirect to="/dashboard" />;
     }
 
