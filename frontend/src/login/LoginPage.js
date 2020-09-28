@@ -7,6 +7,7 @@ import Card from "../common/Card";
 import FormLayout from "./FormLayout";
 import axios from "../api/axios";
 import Cookies from "js-cookie";
+import { Redirect } from "react-router-dom";
 
 const headers = {
   "content-type": "application/json"
@@ -72,6 +73,10 @@ export default class LoginPage extends React.Component {
   }
 
   render() {
+    if (this.state.token) {
+      return <Redirect to="/dashboard" />;
+    }
+
     return (
       <div>
         <Header />
