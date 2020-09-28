@@ -3,6 +3,11 @@ import styles from "./BuyStockPane.module.scss";
 import Card from "../common/Card";
 import { TextField } from "@material-ui/core";
 
+/**
+ * Pane where the user can buy stocks.
+ *
+ * Takes `token` as props.
+ */
 export default class BuyStockPane extends React.Component {
   constructor(props) {
     super(props);

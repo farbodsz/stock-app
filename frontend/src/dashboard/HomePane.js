@@ -3,6 +3,11 @@ import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 
+/**
+ * The overview pane of the dashboard.
+ *
+ * Takes `token` as props.
+ */
 export default class HomePane extends React.Component {
   getUsername() {
     // TODO: Dummy

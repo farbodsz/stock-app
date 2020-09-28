@@ -64,8 +64,8 @@ export default class Dashboard extends React.Component {
   render() {
     const navItems = ["Dashboard", "Buy a stock", "View stock info", "Logout"];
     const panes = [
-      <HomePane />,
-      <BuyStockPane />,
+      <HomePane token={this.state.token} />,
+      <BuyStockPane token={this.state.token} />,
       <ViewStockPane />,
       <LogoutPane />
     ];
