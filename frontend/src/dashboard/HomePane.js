@@ -93,7 +93,7 @@ export default class HomePane extends React.Component {
             <p className={styles.balanceText}>{this.getFormattedBalance()}</p>
           </Card>
         </div>
-        <div className={styles.chartContainer}>
+        <div>
           <Card title="Your Stocks">
             <AdvancedRealTimeChartWidget symbol="NASDAQ:AAPL" width="100%" />
           </Card>
