@@ -7,6 +7,7 @@ import FormLayout from "./FormLayout";
 import Card from "../common/Card";
 import Cookies from "js-cookie";
 import axios from "../api/axios";
+import { Redirect } from "react-router-dom";
 
 const headers = {
   "content-type": "application/json"
@@ -69,6 +70,10 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
+    if (this.state.token) {
+      return <Redirect to="/dashboard" />;
+    }
+
     return (
       <div>
         <Header />
