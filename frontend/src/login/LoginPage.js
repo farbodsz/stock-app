@@ -6,6 +6,7 @@ import TextField from "../common/TextField";
 import Card from "../common/Card";
 import FormLayout from "./FormLayout";
 import axios from "../api/axios";
+import Cookies from "js-cookie";
 
 const headers = {
   "content-type": "application/json",
@@ -19,6 +20,9 @@ const config = {
   responseType: "json",
 };
 
+/**
+ * Page where the user can log in.
+ */
 export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,56 +33,25 @@ export default class LoginPage extends React.Component {
       token: "",
     };
 
-    // TODO: Temporary bindings ------------------------------------------------
-    this.testAction = this.testAction.bind(this);
-    this.onSubmit2 = this.onSubmit2.bind(this);
-    // -------------------------------------------------------------------------
+    this.onLogin = this.onLogin.bind(this);
   }
 
-  // TODO These functions are temporarily used for debugging purposes: ---------
-  testAction = (e) => {
-    console.log("hello");
+  /**
+   * Logs in the user, using the username and password in the text fields.
+   * @param {Event} e
+   */
+  onLogin(e) {
+    console.log("Logging in...");
     this.postLogin();
     e.preventDefault();
-  };
-  testAction2 = (e) => {
-    console.log("hello");
-    this.getBalance();
-    e.preventDefault();
-  };
-  onSubmit2() {
-    console.log("Submit 2 clicked");
-    this.getBalance();
-    // TODO
-  }
-  // ---------------------------------------------------------------------------
-
-  getBalance() {
-    config.headers.authorization = "Token " + this.state.token;
-    axios
-      .get("/balances/", config)
-      .then((res) => {
-        const data = res.data;
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
-  getStocks() {
-    config.headers.authorization = "Token " + this.state.token;
-    axios
-      .get("/stocks/", config)
-      .then((res) => {
-        const data = res.data;
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+  /**
+   * Posts the user's details to the server.
+   *
+   * If the user was able to log in correctly, this component's `token` state
+   * will be updated.
+   */
   postLogin() {
     console.log(this.state.username);
     console.log(this.state.password);
@@ -90,12 +63,20 @@ export default class LoginPage extends React.Component {
       )
       .then((res) => {
         const data = res.data;
-        this.setState({ token: data.token });
+        this.onTokenChange(data.token);
         console.log(data);
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  /**
+   * Callback function invoked when the login token has changed.
+   */
+  onTokenChange(newToken) {
+    this.setState({ token: newToken });
+    Cookies.set("token", newToken);
   }
 
   render() {
@@ -121,16 +102,12 @@ export default class LoginPage extends React.Component {
               <Button
                 id="submit"
                 className={styles.button}
-                onClick={this.testAction}
+                onClick={this.onLogin}
               >
                 Submit
               </Button>
             </Card>
           </FormLayout>
-
-          <Button id="submit2" onClick={this.onSubmit2}>
-            Test Submit
-          </Button>
         </div>
       </div>
     );
