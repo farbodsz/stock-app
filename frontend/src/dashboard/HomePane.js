@@ -3,11 +3,7 @@ import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 import axios from "../api/axios";
-/**
- * The overview pane of the dashboard.
- *
- * Takes `token` as props.
- */
+
 const config = {
   headers: {
     "content-type": "application/json",
@@ -16,6 +12,11 @@ const config = {
   responseType: "json",
 };
 
+/**
+ * The overview pane of the dashboard.
+ *
+ * Takes `token` as props.
+ */
 export default class HomePane extends React.Component {
   state = {
     username: "",
@@ -23,7 +24,7 @@ export default class HomePane extends React.Component {
     stocks: {},
   };
 
-  getUsername() {
+  setUsername() {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/auth/user", config)
@@ -37,7 +38,7 @@ export default class HomePane extends React.Component {
       });
   }
 
-  getStocks() {
+  setStocks() {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/stocks/", config)
@@ -51,7 +52,7 @@ export default class HomePane extends React.Component {
       });
   }
 
-  getBalance() {
+  setBalance() {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/balances/", config)
@@ -66,9 +67,9 @@ export default class HomePane extends React.Component {
   }
 
   componentDidMount() {
-    this.getBalance();
-    this.getUsername();
-    this.getStocks();
+    this.setBalance();
+    this.setUsername();
+    this.setStocks();
   }
 
   render() {
