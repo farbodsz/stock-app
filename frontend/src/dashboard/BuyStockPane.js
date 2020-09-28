@@ -23,7 +23,16 @@ export default class BuyStockPane extends React.Component {
    * @param {string} newTicker the user input from the ticker input field.
    */
   onTickerChange(newTicker) {
-    console.log(newTicker);
+    console.log("Ticker changed: " + newTicker);
+  }
+
+  /**
+   * Changes the amount that is shown in this pane.
+   *
+   * @param {string} newAmount the user input from the amount input field.
+   */
+  onAmountChange(newAmount) {
+    console.log("Amount changed " + newAmount);
   }
 
   render() {
@@ -53,12 +62,11 @@ export default class BuyStockPane extends React.Component {
                 inputRef={ref => {
                   this.inputRef = ref;
                 }}
-                className={styles.tickerInputField}
                 type="number"
                 placeholder="5"
-                onChange={event => this.onTickerChange(event.target.value)}
+                onChange={event => this.onAmountChange(event.target.value)}
               />
-              <p>stocks</p>
+              <p className={styles.amountLabel}>stocks</p>
             </Card>
           </div>
         </div>
