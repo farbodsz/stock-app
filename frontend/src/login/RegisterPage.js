@@ -5,6 +5,7 @@ import Button from "../common/Button";
 import TextField from "../common/TextField";
 import FormLayout from "./FormLayout";
 import Card from "../common/Card";
+import Cookies from "js-cookie";
 import axios from "../api/axios";
 
 const headers = {
@@ -17,7 +18,8 @@ export default class RegisterPage extends React.Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      token: ""
     };
 
     this.onRegister = this.onRegister.bind(this);
@@ -50,11 +52,20 @@ export default class RegisterPage extends React.Component {
       )
       .then(res => {
         const data = res.data;
+        this.onTokenChange(data.token);
         console.log(data);
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  /**
+   * Callback function invoked when the login token has changed.
+   */
+  onTokenChange(newToken) {
+    this.setState({ token: newToken });
+    Cookies.set("token", newToken);
   }
 
   render() {
