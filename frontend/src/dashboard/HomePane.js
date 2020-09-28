@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
+import SymbolOverviewWidget from "../tradingview/SymbolOverviewWidget";
 import axios from "../api/axios";
 import { formatBalance } from "./utils";
 
@@ -95,7 +96,9 @@ export default class HomePane extends React.Component {
         </div>
         <div>
           <Card title="Your Stocks">
-            <AdvancedRealTimeChartWidget symbol="NASDAQ:AAPL" width="100%" />
+            <main className={styles.containerMain}>
+              <SymbolOverviewWidget />
+            </main>
           </Card>
         </div>
       </div>
