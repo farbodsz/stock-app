@@ -7,17 +7,10 @@ import Card from "../common/Card";
 import FormLayout from "./FormLayout";
 import axios from "../api/axios";
 import Cookies from "js-cookie";
+import { Redirect } from "react-router-dom";
 
 const headers = {
-  "content-type": "application/json",
-};
-
-const config = {
-  headers: {
-    "content-type": "application/json",
-    authorization: "",
-  },
-  responseType: "json",
+  "content-type": "application/json"
 };
 
 /**
@@ -30,7 +23,7 @@ export default class LoginPage extends React.Component {
     this.state = {
       username: "",
       password: "",
-      token: "",
+      token: ""
     };
 
     this.onLogin = this.onLogin.bind(this);
@@ -61,12 +54,12 @@ export default class LoginPage extends React.Component {
         { username: this.state.username, password: this.state.password },
         { headers: headers }
       )
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         this.onTokenChange(data.token);
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -80,6 +73,10 @@ export default class LoginPage extends React.Component {
   }
 
   render() {
+    if (this.state.token) {
+      return <Redirect to="/dashboard" />;
+    }
+
     return (
       <div>
         <Header />
@@ -90,14 +87,14 @@ export default class LoginPage extends React.Component {
                 id="username"
                 className={styles.formElement}
                 label="Username"
-                onChange={(e) => this.setState({ username: e.target.value })}
+                onChange={e => this.setState({ username: e.target.value })}
               />
               <TextField
                 id="password"
                 className={styles.formElement}
                 label="Password"
                 type="password"
-                onChange={(e) => this.setState({ password: e.target.value })}
+                onChange={e => this.setState({ password: e.target.value })}
               />
               <Button
                 id="submit"
