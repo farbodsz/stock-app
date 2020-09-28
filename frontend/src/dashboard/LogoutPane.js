@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../common/Button";
 import Card from "../common/Card";
 import FormLayout from "../login/FormLayout";
+import Cookies from "js-cookie";
 
 export default class LogoutPane extends React.Component {
   constructor(props) {
@@ -13,8 +14,9 @@ export default class LogoutPane extends React.Component {
    * Function invoked when the user chooses to log out.
    */
   logout() {
-    // TODO: Replace with actual log out feature
-    alert("User clicked log out");
+    alert("You have successfully logged out.");
+    Cookies.set("token", null);
+    // TODO: Redirect to landing page
   }
 
   render() {
