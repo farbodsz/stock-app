@@ -3,6 +3,16 @@ import styles from "./BuyStockPane.module.scss";
 import Button from "../common/Button";
 import Card from "../common/Card";
 import { TextField } from "@material-ui/core";
+import axios from "../api/axios";
+import { formatBalance } from "./utils";
+
+const config = {
+  headers: {
+    "content-type": "application/json",
+    authorization: ""
+  },
+  responseType: "json"
+};
 
 /**
  * Pane where the user can buy stocks.
@@ -15,12 +25,29 @@ export default class BuyStockPane extends React.Component {
 
     this.state = {
       ticker: "",
-      amount: 0
+      amount: 0,
+      balance: 0
     };
+
+    this.setBalance();
 
     this.onTickerChange = this.onTickerChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
     this.onBuy = this.onBuy.bind(this);
+  }
+
+  setBalance() {
+    config.headers.authorization = "Token " + this.props.token;
+    axios
+      .get("/balances/", config)
+      .then(res => {
+        const data = res.data;
+        this.setState({ balance: data[0].balance });
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   /**
@@ -53,6 +80,10 @@ export default class BuyStockPane extends React.Component {
     alert("Bought");
   }
 
+  getFormattedBalance() {
+    return formatBalance(this.state.balance, false);
+  }
+
   render() {
     return (
       <div>
@@ -71,6 +102,9 @@ export default class BuyStockPane extends React.Component {
           </div>
           <div className={styles.amountInputCard}>
             <Card title="Buy stocks">
+              <p className={styles.currentBalanceLabel}>
+                (Current Balance: {this.getFormattedBalance()})
+              </p>
               <TextField
                 type="number"
                 placeholder="5"

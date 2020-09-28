@@ -3,6 +3,7 @@ import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 import axios from "../api/axios";
+import { formatBalance } from "./utils";
 
 const config = {
   headers: {
@@ -76,25 +77,9 @@ export default class HomePane extends React.Component {
 
   /**
    * Formats `balance` from this component's state and returns it.
-   *
-   * Note: `balance` is expected to be the number of cents, not dollars, the
-   * user owns.
    */
   getFormattedBalance() {
-    const balance = this.state.balance.toString();
-    const n = balance.length;
-    var formatted = `. ${balance[n - 2] + balance[n - 1]}`;
-
-    const dollars = balance.slice(0, n - 2);
-    if (dollars.length <= 4) {
-      return `$ ${dollars} ${formatted}`;
-    }
-
-    // Space out groups of 3
-    for (var i = dollars.length - 1; i >= 0; i -= 3) {
-      formatted = dollars.slice(i - 2, i + 1) + " " + formatted;
-    }
-    return `$ ${dollars.slice(0, dollars.length % 3)} ${formatted}`;
+    return formatBalance(this.state.balance);
   }
 
   render() {
