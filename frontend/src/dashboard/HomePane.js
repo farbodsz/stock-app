@@ -3,13 +3,14 @@ import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
 import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 import axios from "../api/axios";
+import { formatBalance } from "./utils";
 
 const config = {
   headers: {
     "content-type": "application/json",
-    authorization: "",
+    authorization: ""
   },
-  responseType: "json",
+  responseType: "json"
 };
 
 /**
@@ -18,11 +19,19 @@ const config = {
  * Takes `token` as props.
  */
 export default class HomePane extends React.Component {
-  state = {
-    username: "",
-    balance: "",
-    stocks: {},
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      balance: "",
+      stocks: {}
+    };
+
+    this.setUsername();
+    this.setBalance();
+    this.setStocks();
+  }
 
   setUsername() {
     config.headers.authorization = "Token " + this.props.token;
@@ -66,10 +75,11 @@ export default class HomePane extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.setBalance();
-    this.setUsername();
-    this.setStocks();
+  /**
+   * Formats `balance` from this component's state and returns it.
+   */
+  getFormattedBalance() {
+    return formatBalance(this.state.balance);
   }
 
   render() {
@@ -80,10 +90,10 @@ export default class HomePane extends React.Component {
         <h1>Welcome, {this.state.username}!</h1>
         <div className={styles.balanceContainer}>
           <Card title="Balance">
-            <p className={styles.balanceText}>{this.state.balance}</p>
+            <p className={styles.balanceText}>{this.getFormattedBalance()}</p>
           </Card>
         </div>
-        <div className={styles.chartContainer}>
+        <div>
           <Card title="Your Stocks">
             <AdvancedRealTimeChartWidget symbol="NASDAQ:AAPL" width="100%" />
           </Card>
