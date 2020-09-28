@@ -15,7 +15,7 @@ export default class LogoutPane extends React.Component {
    */
   logout() {
     alert("You have successfully logged out.");
-    Cookies.set("token", null);
+    Cookies.remove("token");
     // TODO: Redirect to landing page
   }
 
