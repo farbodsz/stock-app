@@ -6,6 +6,7 @@ import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWid
 import { TextField } from "@material-ui/core";
 import axios from "../api/axios";
 import { formatBalance } from "./utils";
+import EnterTickerCard from "./EnterTickerCard";
 
 const config = {
   headers: {
@@ -106,15 +107,9 @@ export default class BuyStockPane extends React.Component {
         <h1>Buy a stock</h1>
         <div className={styles.cardContainer}>
           <div className={styles.tickerInputCard}>
-            <Card title="Enter ticker">
-              <TextField
-                className={styles.tickerInputField}
-                InputProps={{ style: { fontSize: 40 } }}
-                inputProps={{ maxLength: 5 }}
-                placeholder="GOOGL"
-                onChange={event => this.onTickerChange(event.target.value)}
-              />
-            </Card>
+            <EnterTickerCard
+              onChange={event => this.onTickerChange(event.target.value)}
+            />
           </div>
           <div className={styles.amountInputCard}>
             <Card title="Buy stocks">
