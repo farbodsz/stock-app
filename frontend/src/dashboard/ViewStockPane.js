@@ -1,6 +1,9 @@
 import React from "react";
+import styles from "./ViewStockPane.module.scss";
+import Card from "../common/Card";
 import EnterTickerCard from "./EnterTickerCard";
 import CompanyProfileWidget from "../tradingview/CompanyProfileWidget";
+import FundamentalDataWidget from "../tradingview/FundamentalDataWidget";
 
 export default class ViewStockPane extends React.Component {
   constructor(props) {
@@ -31,6 +34,22 @@ export default class ViewStockPane extends React.Component {
   }
 
   render() {
+    var companyProfileContents = "";
+    if (this.state.ticker) {
+      companyProfileContents = (
+        <div className={styles.widgetsContainer}>
+          <CompanyProfileWidget symbol={this.getSelectedSymbol()} />
+          <FundamentalDataWidget symbol={this.getSelectedSymbol()} />
+        </div>
+      );
+    } else {
+      companyProfileContents = (
+        <p>
+          Enter a NASDAQ stock symbol above to view company information here.
+        </p>
+      );
+    }
+
     return (
       <div>
         <h1>View stock</h1>
@@ -39,9 +58,7 @@ export default class ViewStockPane extends React.Component {
             onChange={event => this.onTickerChange(event.target.value)}
           />
         </div>
-        <div>
-          <CompanyProfileWidget symbol={this.getSelectedSymbol()} />
-        </div>
+        <Card title="Company Profile">{companyProfileContents}</Card>
       </div>
     );
   }
