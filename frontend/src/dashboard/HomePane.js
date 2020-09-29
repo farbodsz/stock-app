@@ -8,9 +8,9 @@ import { formatBalance } from "./utils";
 const config = {
   headers: {
     "content-type": "application/json",
-    authorization: ""
+    authorization: "",
   },
-  responseType: "json"
+  responseType: "json",
 };
 
 /**
@@ -25,7 +25,7 @@ export default class HomePane extends React.Component {
     this.state = {
       username: "",
       balance: "",
-      stocks: {}
+      stocks: [],
     };
 
     this.setUsername();
@@ -37,12 +37,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/auth/user", config)
-      .then(res => {
+      .then((res) => {
         const data = res.data;
         this.setState({ username: data.username });
         console.log(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -51,12 +51,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/stocks/", config)
-      .then(res => {
+      .then((res) => {
         const data = res.data;
         this.setState({ stocks: data });
         console.log(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -65,12 +65,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/balances/", config)
-      .then(res => {
+      .then((res) => {
         const data = res.data;
         this.setState({ balance: data[0].balance });
         console.log(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -118,7 +118,7 @@ export default class HomePane extends React.Component {
         </div>
         <div>
           <Card title="Your Stocks">
-            <SymbolOverviewWidget />
+            <SymbolOverviewWidget symbols={this.state.stocks} />
           </Card>
           <Card title="Your Stocks: Detail">
             <div className={styles.tableContainer}>
@@ -127,7 +127,7 @@ export default class HomePane extends React.Component {
                   <th>Symbol</th>
                   <th>Owned</th>
                 </tr>
-                {this.getUserStocks().map(row => (
+                {this.getUserStocks().map((row) => (
                   <tr>
                     <td style={{ fontWeight: 700 }}>{row.symbol}</td>
                     <td>{row.amount}</td>
