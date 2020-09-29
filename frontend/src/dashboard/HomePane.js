@@ -82,18 +82,32 @@ export default class HomePane extends React.Component {
     return formatBalance(this.state.balance);
   }
 
-  createData(symbol, name, amount) {
-    return { symbol, name, amount };
+  /**
+   * Fetches a list of stocks the user currently owns.
+   *
+   * @returns {list} list of objects with attributes `symbol`, `name`, `amount`
+   *
+   * Example return value:
+   *   [
+   *     { symbol: "GOOGL", name: "Google", amount: 7 },
+   *     { symbol: "AMZN", name: "Amazon", amount: 12 },
+   *     { symbol: "TSLA", name: "Tesla", amount: 5 }
+   *   ]
+   */
+  getUserStocks() {
+    // TODO: Dummy code below to be replaced with actual fetch code
+    const createData = (symbol, name, amount) => {
+      return { symbol, name, amount };
+    };
+    return [
+      createData("GOOGL", "Google", 7),
+      createData("AMZN", "Amazon", 23),
+      createData("TSLA", "Tesla", 40),
+      createData("ZM", "Zoom", 3)
+    ];
   }
 
   render() {
-    const rows = [
-      this.createData("GOOGL", "Google", 7),
-      this.createData("AMZN", "Amazon", 23),
-      this.createData("TSLA", "Tesla", 40),
-      this.createData("ZM", "Zoom", 3)
-    ];
-
     return (
       <div>
         <h1>Welcome, {this.state.username}!</h1>
@@ -114,9 +128,9 @@ export default class HomePane extends React.Component {
                   <th>Name</th>
                   <th>Owned</th>
                 </tr>
-                {rows.map(row => (
+                {this.getUserStocks().map(row => (
                   <tr>
-                    <td style={{fontWeight: 700}}>{row.symbol}</td>
+                    <td style={{ fontWeight: 700 }}>{row.symbol}</td>
                     <td>{row.name}</td>
                     <td>{row.amount}</td>
                   </tr>
