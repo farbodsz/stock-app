@@ -1,6 +1,9 @@
 import React from "react";
+import styles from "./ViewStockPane.module.scss";
+import Card from "../common/Card";
 import EnterTickerCard from "./EnterTickerCard";
 import CompanyProfileWidget from "../tradingview/CompanyProfileWidget";
+import FundamentalDataWidget from "../tradingview/FundamentalDataWidget";
 
 export default class ViewStockPane extends React.Component {
   constructor(props) {
@@ -39,9 +42,12 @@ export default class ViewStockPane extends React.Component {
             onChange={event => this.onTickerChange(event.target.value)}
           />
         </div>
-        <div>
-          <CompanyProfileWidget symbol={this.getSelectedSymbol()} />
-        </div>
+        <Card title="Company Profile">
+          <div className={styles.widgetsContainer}>
+            <CompanyProfileWidget symbol={this.getSelectedSymbol()} />
+            <FundamentalDataWidget symbol={this.getSelectedSymbol()} />
+          </div>
+        </Card>
       </div>
     );
   }
