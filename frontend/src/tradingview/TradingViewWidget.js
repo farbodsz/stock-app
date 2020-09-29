@@ -5,10 +5,13 @@ import React from "react";
  *
  * This abstracts the logic of appending the script to the DOM.
  *
- * This component takes two props:
+ * Props:
  *  - `src`: the widget's script source. For example:
  *    "https://s3.tradingview.com/.../embed-widget-symbol-profile.js"
  *  - `settings`: a JSON object containing the settings for the widget.
+ *  - `dynamic`: if true, then the TradingView script will be updated in each
+ *               `componentDidUpdate` call. Otherwise the script is created only
+ *               once.
  *
  * An example of `settings` is below:
  * ```
@@ -31,9 +34,17 @@ export default class TradingViewWidget extends React.Component {
     this.widgetContainer = React.createRef();
   }
 
+  componentDidMount() {
+    if (!this.props.dynamic) {
+      this.addScript();
+    }
+  }
+
   componentDidUpdate() {
-    this.clearWidgetChildren();
-    this.addScript();
+    if (this.props.dynamic) {
+      this.clearWidgetChildren();
+      this.addScript();
+    }
   }
 
   clearWidgetChildren() {

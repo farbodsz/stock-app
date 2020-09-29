@@ -43,6 +43,7 @@ export default function TickerTapeWidget(props) {
     <TradingViewWidget
       src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
       settings={settings}
+      dynamic={false}
     />
   );
 }
