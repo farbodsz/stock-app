@@ -22,6 +22,10 @@ export default class NavigationPane extends React.Component {
         onClick={() => this.props.onSelect(idx)}
       />
     ));
-    return <nav className={styles.container}>{navItems}</nav>;
+    return (
+      <nav className={styles.container}>
+        <div className={styles.itemsContainer}>{navItems}</div>
+      </nav>
+    );
   }
 }

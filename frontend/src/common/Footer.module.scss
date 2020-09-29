@@ -19,3 +19,8 @@
   color: $color-primary-light;
   font-weight: 700;
 }
+
+.otherLink {
+  @extend .text;
+  color: $color-accent;
+}
