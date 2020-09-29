@@ -161,6 +161,10 @@ export default class BuyStockPane extends React.Component {
     if (stockExists === true) {
       this.adjustBalanceAndStocks();
     } else {
+      let balCalculation =
+        parseInt(this.state.balance) -
+        parseInt(this.state.amount) * parseInt(this.state.price) * 100;
+      this.setState({ new_balance: balCalculation });
       this.postBoughtStock();
     }
   }
