@@ -25,7 +25,7 @@ const config2 = {
 const qs = require("querystring");
 
 //Tpk_2401481048103...
-const iexKey = "Tpk_71";
+const iexKey = "Tpk_71f49f786b1e4339a6e0af29155ec34e";
 
 /**
  * Pane where the user can buy stocks.
@@ -173,7 +173,7 @@ export default class BuyStockPane extends React.Component {
     let stockCalculation = parseInt(stockAmount) + parseInt(this.state.amount);
     let balCalculation =
       parseInt(this.state.balance) -
-      parseInt(this.state.amount) * parseInt(this.state.price);
+      parseInt(this.state.amount) * parseInt(this.state.price) * 100;
     this.setState({ new_balance: balCalculation });
     this.setState({ new_amount: stockCalculation });
     this.deleteStock();
