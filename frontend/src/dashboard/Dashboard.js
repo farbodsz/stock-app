@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Dashboard.module.scss";
 import NavigationPane from "./NavigationPane";
 import TickerTapeWidget from "../tradingview/TickerTapeWidget";
+import Footer from "../common/Footer";
 import HomePane from "./HomePane";
 import PaneLayout from "./PaneLayout";
 import BuyStockPane from "./BuyStockPane";
@@ -85,6 +86,7 @@ export default class Dashboard extends React.Component {
           <div className={styles.containerPanes}>
             <PaneLayout>{panes[this.state.activeIndex]}</PaneLayout>
           </div>
+          <Footer className={styles.footer} />
         </main>
       </div>
     );
