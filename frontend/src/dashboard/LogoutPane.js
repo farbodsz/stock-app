@@ -25,6 +25,11 @@ export default class LogoutPane extends React.Component {
       return <Redirect to="/" />;
     }
 
+
+    // Use extra space so that there is no dead space between footer and
+    // bottom of viewport.
+    const extraSpace = <p style={{ paddingBottom: "1200px" }}> </p>;
+
     return (
       <FormLayout>
         <Card title="Logout?">
@@ -33,6 +38,7 @@ export default class LogoutPane extends React.Component {
           </p>
           <Button onClick={this.logout}>Yes, log out</Button>
         </Card>
+        {extraSpace}
       </FormLayout>
     );
   }
