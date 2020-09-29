@@ -5,6 +5,9 @@ export default function Footer() {
   const GITHUB_FARBOD = "https://github.com/farbodsz/";
   const GITHUB_SHINTARO = "https://github.com/shintaroonuma/";
 
+  const TRADINGVIEW = "https://www.tradingview.com/";
+  const IEX_CLOUD = "https://iexcloud.io/";
+
   return (
     <footer className={styles.footer}>
       <p className={styles.text}>
@@ -19,6 +22,17 @@ export default function Footer() {
         .
       </p>
       <p className={styles.text}>Built using React and Django.</p>
+      <p className={styles.text}>
+        Stock Market data courtesy of{" "}
+        <a href={IEX_CLOUD} className={styles.otherLink}>
+          IEX Cloud
+        </a>
+        , and charts obtained from{" "}
+        <a href={TRADINGVIEW} className={styles.otherLink}>
+          Trading View
+        </a>
+        .
+      </p>
     </footer>
   );
 }
