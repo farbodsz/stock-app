@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./HomePane.module.scss";
 import Card from "../common/Card";
-import AdvancedRealTimeChartWidget from "../tradingview/AdvancedRealTimeChartWidget";
 import SymbolOverviewWidget from "../tradingview/SymbolOverviewWidget";
 import axios from "../api/axios";
 import { formatBalance } from "./utils";
@@ -38,12 +37,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/auth/user", config)
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         this.setState({ username: data.username });
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -52,12 +51,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/stocks/", config)
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         this.setState({ stocks: data });
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -66,12 +65,12 @@ export default class HomePane extends React.Component {
     config.headers.authorization = "Token " + this.props.token;
     axios
       .get("/balances/", config)
-      .then((res) => {
+      .then(res => {
         const data = res.data;
         this.setState({ balance: data[0].balance });
         console.log(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -83,9 +82,18 @@ export default class HomePane extends React.Component {
     return formatBalance(this.state.balance);
   }
 
+  createData(symbol, name, amount) {
+    return { symbol, name, amount };
+  }
+
   render() {
-    // TODO: Replace AdvancedRealTimeChartWidget with a symbol overview widget
-    // instead?
+    const rows = [
+      this.createData("GOOGL", "Google", 7),
+      this.createData("AMZN", "Amazon", 23),
+      this.createData("TSLA", "Tesla", 40),
+      this.createData("ZM", "Zoom", 3)
+    ];
+
     return (
       <div>
         <h1>Welcome, {this.state.username}!</h1>
@@ -96,9 +104,25 @@ export default class HomePane extends React.Component {
         </div>
         <div>
           <Card title="Your Stocks">
-            <main className={styles.containerMain}>
-              <SymbolOverviewWidget />
-            </main>
+            <SymbolOverviewWidget />
+          </Card>
+          <Card title="Your Stocks: Detail">
+            <div className={styles.tableContainer}>
+              <table>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Owned</th>
+                </tr>
+                {rows.map(row => (
+                  <tr>
+                    <td style={{fontWeight: 700}}>{row.symbol}</td>
+                    <td>{row.name}</td>
+                    <td>{row.amount}</td>
+                  </tr>
+                ))}
+              </table>
+            </div>
           </Card>
         </div>
       </div>

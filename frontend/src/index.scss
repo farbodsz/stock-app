@@ -42,3 +42,24 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+table {
+  width: 100%;
+  margin: 5px;
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: 1px solid $color-text;
+  }
+
+  th {
+    color: $color-primary;
+    text-align: start;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    min-width: 100px;
+  }
+}
