@@ -99,12 +99,14 @@ export default class HomePane extends React.Component {
     const createData = (symbol, amount) => {
       return { symbol, amount };
     };
-    return [
-      createData("GOOGL", 7),
-      createData("AMZN", 23),
-      createData("TSLA", 40),
-      createData("ZM", 3)
-    ];
+    let outputArr = new Array();
+    for (let index = 0; index < this.state.stocks.length; ++index) {
+      outputArr[index] = createData(
+        this.state.stocks[index].stock_id,
+        this.state.stocks[index].amount
+      );
+    }
+    return outputArr;
   }
 
   render() {

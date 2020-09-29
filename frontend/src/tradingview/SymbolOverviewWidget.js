@@ -26,7 +26,7 @@ export default class SymbolOverviewWidget extends React.Component {
     let script = document.createElement("script");
     let symb = this.props.symbols;
     console.log(symb);
-    let symbolText = '["TSLA" , "TSLA"],';
+    let symbolText = "";
     for (let index = 0; index < symb.length; ++index) {
       symbolText +=
         '["' +
