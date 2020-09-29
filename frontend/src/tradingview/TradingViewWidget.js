@@ -29,6 +29,7 @@ export default class TradingViewWidget extends React.Component {
     super(props);
 
     this.WIDGET_CONTAINER_ID = "tradingview-widget-container";
+    this.widgetContainer = React.createRef();
   }
 
   componentDidMount() {
@@ -37,13 +38,14 @@ export default class TradingViewWidget extends React.Component {
     script.src = this.props.src;
     script.async = true;
     script.innerHTML = JSON.stringify(this.props.settings);
-    document.getElementById(this.WIDGET_CONTAINER_ID).appendChild(script);
+    this.widgetContainer.current.appendChild(script);
   }
 
   render() {
     return (
       <div
         id={this.WIDGET_CONTAINER_ID}
+        ref={this.widgetContainer}
         className="tradingview-widget-container"
       />
     );
