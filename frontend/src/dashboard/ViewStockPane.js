@@ -35,6 +35,8 @@ export default class ViewStockPane extends React.Component {
 
   render() {
     var companyProfileContents = "";
+    var extraSpace = "";
+
     if (this.state.ticker) {
       companyProfileContents = (
         <div className={styles.widgetsContainer}>
@@ -48,6 +50,10 @@ export default class ViewStockPane extends React.Component {
           Enter a NASDAQ stock symbol above to view company information here.
         </p>
       );
+
+      // Use extra space so that there is no dead space between footer and
+      // bottom of viewport.
+      extraSpace = <p style={{ paddingBottom: "600px" }}> </p>;
     }
 
     return (
@@ -59,6 +65,7 @@ export default class ViewStockPane extends React.Component {
           />
         </div>
         <Card title="Company Profile">{companyProfileContents}</Card>
+        {extraSpace}
       </div>
     );
   }
