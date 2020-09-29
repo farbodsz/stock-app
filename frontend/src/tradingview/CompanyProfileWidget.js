@@ -19,10 +19,14 @@ export default function CompanyProfileWidget(props) {
     locale: "uk"
   };
 
+  console.log(settings);
+
+  console.log("Render");
   return (
     <TradingViewWidget
       src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js"
       settings={settings}
+      dynamic={true}
     />
   );
 }

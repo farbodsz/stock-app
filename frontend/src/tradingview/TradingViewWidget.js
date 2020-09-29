@@ -5,10 +5,13 @@ import React from "react";
  *
  * This abstracts the logic of appending the script to the DOM.
  *
- * This component takes two props:
+ * Props:
  *  - `src`: the widget's script source. For example:
  *    "https://s3.tradingview.com/.../embed-widget-symbol-profile.js"
  *  - `settings`: a JSON object containing the settings for the widget.
+ *  - `dynamic`: if true, then the TradingView script will be updated in each
+ *               `componentDidUpdate` call. Otherwise the script is created only
+ *               once.
  *
  * An example of `settings` is below:
  * ```
@@ -28,22 +31,44 @@ export default class TradingViewWidget extends React.Component {
   constructor(props) {
     super(props);
 
-    this.WIDGET_CONTAINER_ID = "tradingview-widget-container";
+    this.widgetContainer = React.createRef();
   }
 
   componentDidMount() {
+    if (!this.props.dynamic) {
+      this.addScript();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.dynamic) {
+      this.clearWidgetChildren();
+      this.addScript();
+    }
+  }
+
+  clearWidgetChildren() {
+    while (this.widgetContainer.current.firstChild) {
+      this.widgetContainer.current.removeChild(
+        this.widgetContainer.current.firstChild
+      );
+    }
+  }
+
+  addScript() {
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src = this.props.src;
     script.async = true;
     script.innerHTML = JSON.stringify(this.props.settings);
-    document.getElementById(this.WIDGET_CONTAINER_ID).appendChild(script);
+    this.widgetContainer.current.appendChild(script);
   }
 
   render() {
     return (
       <div
-        id={this.WIDGET_CONTAINER_ID}
+        id="tradingview-widget-container"
+        ref={this.widgetContainer}
         className="tradingview-widget-container"
       />
     );
