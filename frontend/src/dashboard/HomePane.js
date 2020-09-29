@@ -85,25 +85,25 @@ export default class HomePane extends React.Component {
   /**
    * Fetches a list of stocks the user currently owns.
    *
-   * @returns {list} list of objects with attributes `symbol`, `name`, `amount`
+   * @returns {list} list of objects with attributes `symbol` and `amount`
    *
    * Example return value:
    *   [
-   *     { symbol: "GOOGL", name: "Google", amount: 7 },
-   *     { symbol: "AMZN", name: "Amazon", amount: 12 },
-   *     { symbol: "TSLA", name: "Tesla", amount: 5 }
+   *     { symbol: "GOOGL", amount: 7 },
+   *     { symbol: "AMZN", amount: 12 },
+   *     { symbol: "TSLA", amount: 5 }
    *   ]
    */
   getUserStocks() {
     // TODO: Dummy code below to be replaced with actual fetch code
-    const createData = (symbol, name, amount) => {
-      return { symbol, name, amount };
+    const createData = (symbol, amount) => {
+      return { symbol, amount };
     };
     return [
-      createData("GOOGL", "Google", 7),
-      createData("AMZN", "Amazon", 23),
-      createData("TSLA", "Tesla", 40),
-      createData("ZM", "Zoom", 3)
+      createData("GOOGL", 7),
+      createData("AMZN", 23),
+      createData("TSLA", 40),
+      createData("ZM", 3)
     ];
   }
 
@@ -125,13 +125,11 @@ export default class HomePane extends React.Component {
               <table>
                 <tr>
                   <th>Symbol</th>
-                  <th>Name</th>
                   <th>Owned</th>
                 </tr>
                 {this.getUserStocks().map(row => (
                   <tr>
                     <td style={{ fontWeight: 700 }}>{row.symbol}</td>
-                    <td>{row.name}</td>
                     <td>{row.amount}</td>
                   </tr>
                 ))}
