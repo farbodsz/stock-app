@@ -60,7 +60,7 @@ export default class RegisterPage extends React.Component {
       .then((res) => {
         const data = res.data;
         config2.headers.authorization = "Token " + data.token;
-        let bal = { balance: 1000000 };
+        let bal = { balance: 100000000 };
         axios
           .post(`/balances/`, qs.stringify(bal), config2)
           .then((res) => {
