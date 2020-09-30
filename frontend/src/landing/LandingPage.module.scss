@@ -1,0 +1,18 @@
+@import "../fonts";
+
+.p {
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 1.2 * $font-size-body;
+  width: 800px;
+  text-align: justify;
+  text-align-last: center;
+  line-height: 1.4;
+}
+
+.links {
+  margin-bottom: 70px;
+  a {
+    font-weight: 700px;
+  }
+}
