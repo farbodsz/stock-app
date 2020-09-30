@@ -15,3 +15,7 @@
   @extend .container-base;
   background-color: $color-background-light;
 }
+
+.paragraphs > * {
+  margin-bottom: 20px;
+}
