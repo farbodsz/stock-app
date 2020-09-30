@@ -114,7 +114,7 @@ export default class BuyStockPane extends React.Component {
    */
   getStockPrice() {
     if (iexKey === "Tpk_None") {
-      this.setState({ price: 50 });
+      this.setState({ price: 227 });
       this.setStocks();
     } else {
       let iexURL = "/twtr/price?token=" + iexKey;
