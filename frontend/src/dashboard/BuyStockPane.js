@@ -25,7 +25,7 @@ const config2 = {
 const qs = require("querystring");
 
 //Tpk_2401481048103...
-const iexKey = "Tpk_71f49f786b1e4339a6e0af29155ec34e";
+const iexKey = "Tpk_71f";
 
 /**
  * Pane where the user can buy stocks.
