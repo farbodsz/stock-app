@@ -25,7 +25,7 @@ const config2 = {
 const qs = require("querystring");
 
 //Tpk_2401481048103...
-const iexKey = "Tpk_71f";
+const iexKey = "Tpk_None";
 
 /**
  * Pane where the user can buy stocks.
@@ -113,19 +113,24 @@ export default class BuyStockPane extends React.Component {
    * Gets stock price from iex cloud api and sets price state
    */
   getStockPrice() {
-    let iexURL = "/twtr/price?token=" + iexKey;
-    iexcloud
-      .get(iexURL)
-      .then((res) => {
-        const data = res.data;
-        this.setState({ price: data });
-        console.log(data);
-        this.setStocks();
-      })
-      .catch((error) => {
-        console.log("getStockprice error");
-        console.log(error);
-      });
+    if (iexKey === "Tpk_None") {
+      this.setState({ price: 50 });
+      this.setStocks();
+    } else {
+      let iexURL = "/twtr/price?token=" + iexKey;
+      iexcloud
+        .get(iexURL)
+        .then((res) => {
+          const data = res.data;
+          this.setState({ price: data });
+          console.log(data);
+          this.setStocks();
+        })
+        .catch((error) => {
+          console.log("getStockprice error");
+          console.log(error);
+        });
+    }
   }
 
   /** 2
